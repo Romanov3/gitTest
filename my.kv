@@ -1,0 +1,177 @@
+<MyGrid>
+	GridLayout:
+		cols:2
+		rows:1
+		size: root.width, root.height
+		spacing: 1
+
+		GridLayout:
+			cols:1
+			padding: 5,5
+			spacing: 10
+
+			canvas:
+				Color:
+					rgba: 1,1,1,1
+				Rectangle:
+					pos: self.pos
+					size: self.size
+			
+			Label:
+				text: 'Коннектор Fortify/OpenText, GIS'
+				halign:'center'
+				color: 0,0.6,0.8,1
+				font_size: 20
+				size_hint: 1, 0.2
+
+			GridLayout:
+				cols:2
+				size_hint: 1, 0.3
+				canvas.before:
+					Color:
+						rgba:0,0,0,1
+					Line:
+						width: 1
+						rectangle: self.x, self.y, self.width, self.height
+
+				Label:
+					text: 'Логин:'
+					padding_x: 5
+					text_size: self.size
+					valign: 'center'
+					halign:'left'
+					color: 0,0,0,1
+					size_hint: 0.5, 1
+				TextInput:
+					id: usnid
+					text: 'hpfuser'
+					multiline: False
+					size_hint: 0.5, 1
+				Label:
+					text: 'Пароль:'
+					padding_x: 5
+					text_size: self.size
+					valign: 'center'
+					halign:'left'
+					color: 0,0,0,1
+					size_hint: 0.5, 1
+				TextInput:
+					id: pswid
+					multiline: False
+					size_hint: 0.5, 1
+			GridLayout:
+				cols:2
+				size_hint: 1, 0.3
+				canvas.before:
+					Color:
+						rgba:0,0,0,1
+					Line:
+						width: 1
+						rectangle: self.x, self.y, self.width, self.height
+				Label:
+					text: 'Местоположение .csv'
+					padding_x: 5
+					text_size: self.size
+					valign: 'center'
+					halign:'left'
+					color: 0,0,0,1
+					size_hint: 0.5, 0.2
+				TextInput:
+					id: csv_locationid
+					text: "C:\iuspt21ot_u4r.csv"
+					size_hint: 0.5, 0.3
+					multiline: False
+				Label:
+					text: 'Куда сохранить?'
+					padding_x: 5
+					text_size: self.size
+					valign: 'center'
+					halign:'left'
+					color: 0,0,0,1
+					size_hint: 0.5, 0.2
+				TextInput:
+					id: save_inid
+					text: "C:\\"
+					size_hint: 0.5, 0.3
+					multiline: False
+			Button:
+				text:'Показать данные из csv'
+				size_hint: 1,0.15
+				on_press: root.btt_show_csv_press(csv_locationid.text)
+			Button:
+				text:'Запустить'
+				size_hint: 1,0.15
+				on_press: root.btt_getalldata_press(usnid.text, pswid.text, save_inid.text, opinion_csvid.text)
+
+		BoxLayout:
+			orientation: 'vertical'
+			size_hint: 1, 0.8
+
+			canvas:
+				Color:
+					rgb: 1, 1, 1
+				Rectangle:
+					size: self.size
+					pos: self.pos
+
+			Label:
+				text: 'Данные из csv(можно листать):'
+				padding: 0, 5
+				spacing: 10
+				text_size: self.size
+				valign: 'center'
+				halign:'center'				
+				color: 0,0,0,1
+				size_hint: 1, 0.15
+
+			ScrollView:
+				size: self.size
+				canvas.before:
+					Color:
+						rgba:0,0,0,1
+					Line:
+						width: 1
+						rectangle: self.x, self.y, self.width, self.height
+
+				GridLayout:
+					cols: 1
+					padding: dp(5)
+					size_hint_y: None
+					height: self.minimum_height
+
+					
+
+					Label:
+						id: textscr
+						text: ''
+						size_hint_y: None
+						valign: 'top'
+						height: self.texture_size[1]
+						text_size: self.width - dp(10), None
+						color: 0, 0, 0, 1
+
+			GridLayout:
+				canvas.before:
+					Color:
+						rgba:0,0,0,1
+					Line:
+						width: 1
+						rectangle: self.x, self.y, self.width, self.height
+				size_hint: 1, 0.17
+				cols:2
+				Label:
+					text: 'Использовать вариант номер: '
+					padding_x: 5
+					text_size: self.size
+					valign: 'center'
+					halign:'left'				
+					color: 0,0,0,1
+					size_hint: 0.7, 0.15
+
+				TextInput:
+					padding: 5,5
+					spacing: 5,5
+					id: opinion_csvid
+					text: "0"
+					size_hint: 0.3, 0.15
+					multiline: False
